@@ -29,13 +29,13 @@ ForEach ($AppRemove in $AppsToRemove) {
             If ($RemNum -ge 2) {
                 #Write-EventLog -LogName Application -Source "Microsoft Intune Management Extension" -EventID 9999 -Message "Found $($RemNum) versions of $($AppRemove)."
                 For ($n=0; $n -eq $nMax; $n++) {
-                    $AppCount ++
+                    $AppCount++
                     Remove-AppxPackage -Package $AppRemovePackages.PackageFullName[$n] -AllUsers
                     #Write-EventLog -LogName Application -Source "Microsoft Intune Management Extension" -EventID 9999 -Message "Successfully removed: $($AppRemovePackages.PackageFullName[$n])."
                 }
             }
             Else {
-                $AppCount ++
+                $AppCount++
                 Remove-AppxPackage -Package $AppRemovePackages.PackageFullName -AllUsers
                 #Write-EventLog -LogName Application -Source "Microsoft Intune Management Extension" -EventID 9999 -Message "Successfully removed: $($AppRemovePackages.PackageFullName)."
             }
@@ -45,7 +45,7 @@ ForEach ($AppRemove in $AppsToRemove) {
         }
     }
     If (($AppRemove -in $ProvAppsInstalled)) {
-        $AppCount ++
+        $AppCount++
         Try {
             #Write-EventLog -LogName Application -Source "Microsoft Intune Management Extension" -EventID 9999 -Message "Trying to remove the provisioned package: $($AppRemove)."
             $AppRemoveProvPackage = Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $AppRemove }
